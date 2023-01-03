@@ -6,4 +6,4 @@ const firTree = require("./firTree.js");
 console.log(main());
 console.log(main2(1, 2));
 console.log(myEvilPow(5, 2));
-firTree(5);
+firTree(3);

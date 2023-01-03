@@ -12,3 +12,7 @@ function firTree(rows) {
 }
 
 module.exports = firTree;
+
+function firTree2() {}
+
+module.exports = firTree2;
