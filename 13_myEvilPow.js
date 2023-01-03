@@ -1,9 +1,9 @@
-function myEvilPow(a, b) {
-  if (a === 0) {
+function myEvilPow(x, y) {
+  if (y === 0) {
     return 1;
   }
 
-  return a * myEvilPow(a, b - 1);
+  return x * myEvilPow(x, y - 1);
 }
 
 module.exports = myEvilPow;
