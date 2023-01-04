@@ -1,5 +1,6 @@
 function myStrToWordArray(string) {
-  return string.split(" ");
+  // en ternaire retourner tableau vide si string vide
+  return string === "" ? [] : string.split(" ");
 }
 
 module.exports = myStrToWordArray;
