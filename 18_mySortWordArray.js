@@ -1,5 +1,8 @@
 function mySortWordArray(string) {
-  let array = string.split(" ");
+  let array;
+  // en ternaire retourner tableau vide si string vide
+  string === "" ? (array = []) : array;
+  array = string.split(" ");
   array.sort();
   return array;
 }
