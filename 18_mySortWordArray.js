@@ -1,11 +1,13 @@
 function mySortWordArray(string) {
-  let array = [];
-  // en ternaire retourner tableau vide si string vide
-  if (string !== "") {
-    array = string.split(" ");
-    array.sort();
-    return array;
+  // Check if the string is empty
+  if (string === "") {
+    // Return an empty array if the string is empty
+    return [];
   }
+  // Split the string into an array and sort it
+  let array = string.split(" ");
+  array.sort();
+  return array;
 }
 
 module.exports = mySortWordArray;
