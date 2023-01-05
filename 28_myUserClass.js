@@ -1,11 +1,11 @@
 class User {
-  constructor(prenom, name, age) {
-    this.prenom = prenom;
+  constructor(name, surname, age) {
     this.name = name;
+    this.surname = surname;
     this.age = age;
   }
   presentation() {
-    return `Je m'apelle ${this.prenom} ${this.name}, j'ai ${this.age} ans`;
+    return `Je m'apelle ${this.surname} ${this.name}, j'ai ${this.age} ans`;
   }
 }
 
