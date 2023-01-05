@@ -1,7 +1,7 @@
 class User {
-  constructor(name, surname, age) {
-    this.name = name;
+  constructor(surname, name, age) {
     this.surname = surname;
+    this.name = name;
     this.age = age;
   }
   presentation() {
