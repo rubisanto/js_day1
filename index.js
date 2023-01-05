@@ -1,3 +1,3 @@
-const myCreateObject = require("./25_myCreateObject");
+const myUserDescription = require("./26_myUserDescription");
 
-console.log(myCreateObject("Doe", "John", 35));
+console.log(myUserDescription({ name: "John", surname: "Doe", age: 42 }));

@@ -1,5 +1,5 @@
 function myCreateObject(surname, name, age) {
-  var obj = {};
+  let obj = {};
   obj.surname = surname;
   obj.name = name;
   obj.age = age;
