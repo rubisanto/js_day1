@@ -5,7 +5,9 @@ class Calc {
   }
 
   compute(operation) {
-    this.result = eval(operation);
+    const elements = operation.split(" ");
+
+    // this.result = eval(operation);
     this.history.push(this.result);
     return `${operation} = ${this.result}`;
   }
