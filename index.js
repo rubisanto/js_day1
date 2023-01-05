@@ -1,3 +1,3 @@
-const myUserDescription = require("./26_myUserDescription");
+const myObjectValues = require("./30_myObjectValues.js");
 
-console.log(myUserDescription({ name: "John", surname: "Doe", age: 42 }));
+console.log(myObjectValues({ a: 1, b: 2, c: 3 }));
