@@ -1,62 +1,78 @@
 class Calc {
   constructor() {
-    this.result = 0;
+    this.result = null;
     this.history = [];
-    this.error = "";
   }
 
-  compute(operation) {
-    // controler que ce qu'il y a dans operation est bien un nombre et un opérateur
-    const validCharacters = /^[0-9+-/*]+$/;
-    operation = parseInt(operation);
-    if (!validCharacters.test(operation)) {
-      this.error = "Error: Invalid input string";
-      return this.error;
-    }
-    // remettre operation en string
-    operation = operation.toString();
+  compute(expression) {
+    // Split the expression into an array of tokens
+    let tokens = expression.split(/\s+/);
 
-    const elements = operation.split(" ");
-    // si y a un opérateur faire une fonction spécifique
-    const operators = elements.filter((element) =>
-      ["+", "-", "/", "*"].includes(element)
-    );
+    // Stack for numbers
+    let values = [];
 
-    operators.forEach((element, index) => {
-      switch (element) {
-        case "+":
-          // Do something specific for the + operator
-          this.result =
-            parseInt(elements[index - 1]) + parseInt(elements[index + 1]);
-          break;
-        case "-":
-          // Do something specific for the - operator
-          this.result =
-            parseInt(elements[index - 1]) - parseInt(elements[index + 1]);
+    // Stack for operators
+    let ops = [];
 
-          break;
-        case "/":
-          // Do something specific for the / operator
-          if (parseInt(elements[index + 1]) != 0) {
-            this.result =
-              parseInt(elements[index - 1]) / parseInt(elements[index + 1]);
-          } else {
-            this.error = "Error: Division by 0";
-            return this.error;
-          }
+    for (let i = 0; i < tokens.length; i++) {
+      // Current token
+      let token = tokens[i];
 
-          break;
-        case "*":
-          // Do something specific for the * operator
-          this.result =
-            parseInt(elements[index - 1]) * parseInt(elements[index + 1]);
-          break;
+      if (this.isNumber(token)) {
+        // If the token is a number, push it to the values stack
+        values.push(Number(token));
+      } else if (this.isOperator(token)) {
+        // If the token is an operator, push it to the ops stack
+        ops.push(token);
+      } else if (token === "(") {
+        // If the token is a left parenthesis, push it to the ops stack
+        ops.push(token);
+      } else if (token === ")") {
+        // If the token is a right parenthesis,
+        // pop the ops stack until the corresponding left parenthesis is found
+        while (ops[ops.length - 1] !== "(") {
+          let op = ops.pop();
+          let val2 = values.pop();
+          let val1 = values.pop();
+          values.push(this.applyOp(op, val1, val2));
+        }
+        ops.pop();
       }
-    });
-    // interdiction d'utiliser eval
-    // this.result = eval(operation);
-    this.history.push(this.result);
-    return `${operation} = ${this.result}`;
+    }
+
+    // Perform remaining operations until the ops stack is empty
+    while (ops.length > 0) {
+      let op = ops.pop();
+      let val2 = values.pop();
+      let val1 = values.pop();
+      values.push(this.applyOp(op, val1, val2));
+    }
+
+    // The result is the top of the values stack
+    let result = values.pop();
+    this.result = result;
+    this.history.push(`${expression}=${result}`);
+    return `${expression}=${result}`;
+  }
+
+  isNumber(token) {
+    return !isNaN(Number(token));
+  }
+
+  isOperator(token) {
+    return ["+", "-", "*", "/"].indexOf(token) !== -1;
+  }
+
+  applyOp(op, val1, val2) {
+    if (op === "+") {
+      return val1 + val2;
+    } else if (op === "-") {
+      return val1 - val2;
+    } else if (op === "*") {
+      return val1 * val2;
+    } else if (op === "/") {
+      return val1 / val2;
+    }
   }
 
   lastResult() {
