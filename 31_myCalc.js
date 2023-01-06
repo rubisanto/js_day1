@@ -2,6 +2,7 @@ class Calc {
   constructor() {
     this.result = 0;
     this.history = [];
+    this.error = "";
   }
 
   compute(operation) {
@@ -15,18 +16,34 @@ class Calc {
       switch (element) {
         case "+":
           // Do something specific for the + operator
+          this.result =
+            parseInt(elements[index - 1]) + parseInt(elements[index + 1]);
           break;
         case "-":
           // Do something specific for the - operator
+          this.result =
+            parseInt(elements[index - 1]) - parseInt(elements[index + 1]);
+
           break;
         case "/":
           // Do something specific for the / operator
+          if (parseInt(elements[index + 1]) != 0) {
+            this.result =
+              parseInt(elements[index - 1]) / parseInt(elements[index + 1]);
+          } else {
+            this.error = "Error: Division by 0";
+            return this.error;
+          }
+
           break;
         case "*":
           // Do something specific for the * operator
+          this.result =
+            parseInt(elements[index - 1]) * parseInt(elements[index + 1]);
           break;
       }
     });
+    // interdiction d'utiliser eval
     // this.result = eval(operation);
     this.history.push(this.result);
     return `${operation} = ${this.result}`;
