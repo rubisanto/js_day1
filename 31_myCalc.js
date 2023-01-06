@@ -8,10 +8,13 @@ class Calc {
   compute(operation) {
     // controler que ce qu'il y a dans operation est bien un nombre et un opérateur
     const validCharacters = /^[0-9+-/*]+$/;
+    operation = parseInt(operation);
     if (!validCharacters.test(operation)) {
       this.error = "Error: Invalid input string";
       return this.error;
     }
+    // remettre operation en string
+    operation = operation.toString();
 
     const elements = operation.split(" ");
     // si y a un opérateur faire une fonction spécifique

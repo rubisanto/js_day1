@@ -1,3 +1,5 @@
-const myObjectValues = require("./30_myObjectValues.js");
+const Calc = require("./31_myCalc.js");
 
-console.log(myObjectValues({ a: 1, b: 2, c: 3 }));
+const calc = new Calc();
+
+console.log(calc.compute(1 + 2));
