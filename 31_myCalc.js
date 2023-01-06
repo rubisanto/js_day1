@@ -6,6 +6,13 @@ class Calc {
   }
 
   compute(operation) {
+    // controler que ce qu'il y a dans operation est bien un nombre et un opérateur
+    const validCharacters = /^[0-9+-/*]+$/;
+    if (!validCharacters.test(operation)) {
+      this.error = "Error: Invalid input string";
+      return this.error;
+    }
+
     const elements = operation.split(" ");
     // si y a un opérateur faire une fonction spécifique
     const operators = elements.filter((element) =>
